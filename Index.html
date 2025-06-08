@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>스타크래프트 유닛 백과</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #0a0a0a;
+      color: #fff;
+    }
+    header {
+      background-color: #222;
+      padding: 20px;
+      text-align: center;
+    }
+    .intro {
+      text-align: center;
+      margin: 10px;
+    }
+    .factions {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    .faction {
+      border: 1px solid #555;
+      border-radius: 10px;
+      padding: 10px;
+      width: 30%;
+      min-width: 280px;
+      background-color: #111;
+      margin-bottom: 20px;
+    }
+    .faction h2 {
+      text-align: center;
+      color: #ffcc00;
+    }
+    .unit-icon {
+      width: 64px;
+      height: 64px;
+      margin: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: transform 0.2s;
+      object-fit: contain;
+    }
+    .unit-icon:hover {
+      transform: scale(1.1);
+      border-color: #00ffff;
+    }
+    .unit-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    /* 모달 스타일 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 25; left: 25;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 12px;
+      width: 1000px; /* 가로 3배 확대 */
+      max-width: 95vw;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px;
+      position: relative;
+      color: #fff;
+    }
+    .modal-text {
+      flex: 2;
+    }
+    #unit-image {
+      flex: 1;
+      max-width: 250px;
+      max-height: 250px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #444;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 25px;
+      color: #f00;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>스타크래프트 유닛 백과</h1>
+  </header>
+  <div class="intro">
+    <p>3개 종족의 주요 유닛을 클릭하여 자세한 정보를 확인해보세요!</p>
+  </div>
+
+  <div class="factions">
+  <!-- 저그 -->
+<div class="faction">
+  <h2>저그</h2>
+  <div class="unit-list">
+    <img src="item/드론.png" class="unit-icon" alt="드론" onclick="showDetail('드론')">
+        <img src="item/저글링.png" class="unit-icon" alt="저글링" onclick="showDetail('저글링')">
+    <img src="item/히드라리스크.png" class="unit-icon" alt="히드라리스크" onclick="showDetail('히드라리스크')">
+    <img src="item/럴커.png" class="unit-icon" alt="럴커" onclick="showDetail('럴커')">
+    <img src="item/오버로드.png" class="unit-icon" alt="오버로드" onclick="showDetail('오버로드')">
+    <img src="item/뮤탈리스크.png" class="unit-icon" alt="뮤탈리스크" onclick="showDetail('뮤탈리스크')">
+    <img src="item/가디언.png" class="unit-icon" alt="가디언" onclick="showDetail('가디언')">
+    <img src="item/디바우러.png" class="unit-icon" alt="디바우러" onclick="showDetail('디바우러')">
+    <img src="item/스커지.png" class="unit-icon" alt="스커지" onclick="showDetail('스커지')">
+    <img src="item/퀸.png" class="unit-icon" alt="퀸" onclick="showDetail('퀸')">
+    <img src="item/울트라리스크.png" class="unit-icon" alt="울트라리스크" onclick="showDetail('울트라리스크')">
+    <img src="item/디파일러.png" class="unit-icon" alt="디파일러" onclick="showDetail('디파일러')">
+    <img src="item/라바.png" class="unit-icon" alt="라바" onclick="showDetail('라바')">
+    <img src="item/에그.png" class="unit-icon" alt="에그" onclick="showDetail('에그')">
+  </div>
+</div>
+
+<!-- 테란 -->
+<div class="faction">
+  <h2>테란</h2>
+  <div class="unit-list">
+    <img src="item/SCV.png" class="unit-icon" alt="SCV" onclick="showDetail('SCV')">
+    <img src="item/마린.png" class="unit-icon" alt="마린" onclick="showDetail('마린')">
+    <img src="item/파이어뱃.png" class="unit-icon" alt="파이어뱃" onclick="showDetail('파이어뱃')">
+    <img src="item/메딕.png" class="unit-icon" alt="메딕" onclick="showDetail('메딕')">
+    <img src="item/고스트.png" class="unit-icon" alt="고스트" onclick="showDetail('고스트')">
+    <img src="item/벌처.png" class="unit-icon" alt="벌처" onclick="showDetail('벌처')">
+    <img src="item/골리앗.png" class="unit-icon" alt="골리앗" onclick="showDetail('골리앗')">
+    <img src="item/탱크.png" class="unit-icon" alt="탱크" onclick="showDetail('탱크')">
+    <img src="item/드랍쉽.png" class="unit-icon" alt="드랍쉽" onclick="showDetail('드랍쉽')">
+    <img src="item/레이스.png" class="unit-icon" alt="레이스" onclick="showDetail('레이스')">
+    <img src="item/발키리.png" class="unit-icon" alt="발키리" onclick="showDetail('발키리')">
+    <img src="item/사이언스배슬.png" class="unit-icon" alt="사이언스배슬" onclick="showDetail('사이언스배슬')">
+    <img src="item/배틀크루저.png" class="unit-icon" alt="배틀크루저" onclick="showDetail('배틀크루저')">
+  </div>
+</div>
+
+<!-- 프로토스 -->
+<div class="faction">
+  <h2>프로토스</h2>
+  <div class="unit-list">
+    <img src="item/프로브.png" class="unit-icon" alt="프로브" onclick="showDetail('프로브')">
+    <img src="item/질럿.png" class="unit-icon" alt="질럿" onclick="showDetail('질럿')">
+    <img src="item/드라군.png" class="unit-icon" alt="드라군" onclick="showDetail('드라군')">
+    <img src="item/하이템플러.png" class="unit-icon" alt="하이템플러" onclick="showDetail('하이템플러')">
+    <img src="item/아칸.png" class="unit-icon" alt="아칸" onclick="showDetail('아칸')">
+    <img src="item/다크템플러.png" class="unit-icon" alt="다크템플러" onclick="showDetail('다크템플러')">
+    <img src="item/다크아칸.png" class="unit-icon" alt="다크아칸" onclick="showDetail('다크아칸')">
+    <img src="item/셔틀.png" class="unit-icon" alt="셔틀" onclick="showDetail('셔틀')">
+    <img src="item/리버.png" class="unit-icon" alt="리버" onclick="showDetail('리버')">
+    <img src="item/옵저버.png" class="unit-icon" alt="옵저버" onclick="showDetail('옵저버')">
+    <img src="item/커세어.png" class="unit-icon" alt="커세어" onclick="showDetail('커세어')">
+    <img src="item/스카웃.png" class="unit-icon" alt="스카웃" onclick="showDetail('스카웃')">
+    <img src="item/캐리어.png" class="unit-icon" alt="캐리어" onclick="showDetail('캐리어')">
+    <img src="item/아비터.png" class="unit-icon" alt="아비터" onclick="showDetail('아비터')">
+      </div>
+    </div>
+  </div>
+
+  <!-- 모달 -->
+  <div id="modal" class="modal" onclick="hideModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="close-btn" onclick="hideModal(event)">✖</div>
+      <div class="modal-text">
+        <h3 id="unit-name">유닛 이름</h3>
+        <p id="unit-desc"></p>
+        <ul id="unit-stats"></ul>
+      </div>
+      <img id="unit-image" src="" alt="유닛 이미지" />
+    </div>
+  </div>
+
+  <script>
+    const units = {
+     "저글링": {
+  "desc": "저글링은 저그의 빠른 근접 공격 유닛입니다.",
+  "stats": {
+    "공격력": "5",
+    "공격속도": "0.497",
+    "이동속도": "4.13",
+    "사정거리": "0.1",
+    "생산비용": "50 미네랄",
+    "생산건물": "번식지",
+    "특수능력": "이동속도 및 공격속도 증가"
+  },
+  "img": "modal/저글링.png"
+},
+"드론": {
+  "desc": "드론은 저그의 일꾼 유닛입니다.",
+  "stats": {
+    "공격력": "5",
+    "공격속도": "1.2",
+    "이동속도": "3.15",
+    "사정거리": "0.1",
+    "생산비용": "50 미네랄",
+    "생산건물": "유전자 복제기",
+    "특수능력": "자원 채취"
+  },
+  "img": "modal/드론.png"
+},
+"히드라리스크": {
+  "desc": "히드라리스크는 저그의 원거리 공격 유닛으로, 지상과 공중 유닛 모두를 효과적으로 상대할 수 있습니다.",
+  "stats": {
+    "공격력": "10",
+    "공격속도": "0.83",
+    "이동속도": "3.75",
+    "사정거리": "4",
+    "생산비용": "75 미네랄, 25 가스",
+    "생산건물": "히드라리스크 굴",
+    "특수능력": "이동속도 및 사거리 증가가"
+  },
+  "img": "modal/히드라리스크.png"
+},
+"럴커": {
+  "desc": "럴커는 땅속에 숨어 지상 유닛에게 관통형 스플래시 공격을 가하는 강력한 유닛입니다.",
+  "stats": {
+    "공격력": "20 (스플래시)",
+    "공격속도": "1.05",
+    "이동속도": "2.61",
+    "사정거리": "6 (지하)",
+    "생산비용": "125 미네랄, 125 가스",
+    "생산건물": "히드라리스크 굴 + 러커 변이 업그레이드",
+    "특수능력": "잠복 상태에서만 공격 가능"
+  },
+  "img": "modal/럴커.png"
+},
+"오버로드": {
+  "desc": "오버로드는 저그의 시야 및 수송 유닛입니다.",
+  "stats": {
+    "공격력": "0",
+    "공격속도": "0",
+    "이동속도": "3.15",
+    "사정거리": "0",
+    "생산비용": "100 미네랄",
+    "생산건물": "번식지",
+    "특수능력": "시야 확보, 수송"
+  },
+  "img": "modal/오버로드.png"
+},
+"뮤탈리스크": {
+  "desc": "뮤탈리스크는 빠른 이동속도와 튕기는 공격으로 지상과 공중 유닛을 공격할 수 있는 저그의 대표적인 공중 유닛입니다.",
+  "stats": {
+    "공격력": "9 (튕김 공격)",
+    "공격속도": "1.5",
+    "이동속도": "7.81",
+    "사정거리": "3",
+    "생산비용": "100 미네랄, 100 가스",
+    "생산건물": "스파이어",
+    "특수능력": "공격이 3개의 대상에게 튕김"
+  },
+  "img": "modal/뮤탈리스크.png"
+},
+"가디언": {
+  "desc": "가디언은 뮤탈리스크가 변태한 장거리 지상 폭격 유닛입니다.",
+  "stats": {
+    "공격력": "20 (폭발형)",
+    "공격속도": "2.05",
+    "이동속도": "4.12",
+    "사정거리": "10",
+    "생산비용": "50 미네랄, 100 가스 (변태비용)",
+    "생산건물": "대군주 + 스파이어 + 뮤탈리스크 변태",
+  },
+  "img": "modal/가디언.png"
+},
+"디바우러": {
+  "desc": "디바우러는 뮤탈리스크에서 변태되며 공중 유닛을 대상으로 강력한 부식성 산 공격을 가합니다.",
+  "stats": {
+    "공격력": "25 + 부식 디버프",
+    "공격속도": "2.5",
+    "이동속도": "4.12",
+    "사정거리": "6",
+    "생산비용": "150 미네랄, 50 가스 (변태비용)",
+    "생산건물": "대군주 + 스파이어 + 뮤탈리스크 변태",
+    "특수능력": "공격 시 산성 구름 디버프 적용"
+  },
+  "img": "modal/디바우러.png"
+},
+"스커지": {
+  "desc": "스커지는 자폭 공격으로 강력한 공중 유닛을 빠르게 처치할 수 있는 일회성 유닛입니다.",
+  "stats": {
+    "공격력": "110 (자폭)",
+    "공격속도": "N/A (접촉 시 자폭)",
+    "이동속도": "9.15",
+    "사정거리": "접촉",
+    "생산비용": "25 미네랄, 75 가스 (2기 생산)",
+    "생산건물": "스파이어",
+    "특수능력": "공중 유닛에 자폭 공격"
+  },
+  "img": "modal/스커지.png"
+},
+"퀸": {
+  "desc": "퀸은 지원형 공중 유닛으로, 다양한 디버프 및 유틸리티 기술을 사용할 수 있습니다.",
+  "stats": {
+    "공격력": "없음",
+    "공격속도": "없음",
+    "이동속도": "4.57",
+    "사정거리": "N/A",
+    "생산비용": "100 미네랄, 100 가스",
+    "생산건물": "퀸 둥지",
+    "특수능력": "기생충, 감염, 생체 폭탄"
+  },
+  "img": "modal/퀸.png"
+},
+"울트라리스크": {
+  "desc": "울트라리스크는 저그의 궁극적인 근접 전투 유닛으로, 강력한 체력과 방어력을 자랑합니다.",
+  "stats": {
+    "공격력": "20 (광역 베기)",
+    "공격속도": "0.696",
+    "이동속도": "4.57",
+    "사정거리": "근접",
+    "생산비용": "200 미네랄, 200 가스",
+    "생산건물": "울트라리스크 동굴",
+    "특수능력": "방어력 및 이동속도 증가가"
+  },
+  "img": "modal/울트라리스크.png"
+},
+"디파일러": {
+  "desc": "디파일러는 저그의 강력한 마법 유닛으로, 전장의 흐름을 바꾸는 기술을 사용할 수 있습니다.",
+  "stats": {
+    "공격력": "없음",
+    "공격속도": "없음",
+    "이동속도": "4.13",
+    "사정거리": "N/A",
+    "생산비용": "50 미네랄, 150 가스",
+    "생산건물": "디파일러 마운드",
+    "특수능력": "암흑 구름, 역병, 소모"
+  },
+  "img": "modal/디파일러.png"
+},
+"라바": {
+  "desc": "라바는 저그의 초기 알 유닛입니다.",
+  "stats": {
+    "공격력": "0",
+    "공격속도": "0",
+    "이동속도": "3.15",
+    "사정거리": "0",
+    "생산비용": "0",
+    "생산건물": "없음",
+    "특수능력": "변태하여 다른 유닛이 됨"
+  },
+  "img": "modal/라바.png"
+},
+"에그": {
+  "desc": "에그는 저그 유닛이 부화하는 알입니다.",
+  "stats": {
+    "공격력": "0",
+    "공격속도": "0",
+    "이동속도": "0",
+    "사정거리": "0",
+    "생산비용": "0",
+    "생산건물": "없음",
+    "특수능력": "부화"
+  },
+  "img": "modal/에그.png"
+},
+
+     "SCV": {
+  "desc": "SCV는 테란의 일꾼 유닛입니다.",
+  "stats": {
+    "공격력": "5",
+    "공격속도": "1.5",
+    "이동속도": "3.15",
+    "사정거리": "0.1",
+    "생산비용": "50 미네랄",
+    "생산건물": "커맨드 센터",
+    "특수능력": "자원 채취 및 건물 수리"
+  },
+  "img": "modal/SCV.png"
+},
+"마린": {
+  "desc": "마린은 테란의 기본 보병 유닛으로, 빠른 생산과 저비용으로 다수의 유닛을 배치할 수 있습니다.",
+  "stats": {
+    "공격력": "6",
+    "공격속도": "0.75",
+    "이동속도": "1.95",
+    "사정거리": "4",
+    "생산비용": "50 미네랄",
+    "생산건물": "병영",
+    "특수능력": "자극제 사용 가능"
+  },
+  "img": "modal/마린.png"
+},
+"파이어뱃": {
+  "desc": "파이어뱃은 근접 공격을 하는 테란의 보병 유닛으로, 불꽃방사기를 사용하여 광역 피해를 입힙니다.",
+  "stats": {
+    "공격력": "16",
+    "공격속도": "0.924",
+    "이동속도": "2.976",
+    "사정거리": "2",
+    "생산비용": "50 미네랄, 25 가스",
+    "생산건물": "병영 + 아카데미",
+    "특수능력": "자극제 사용 가능"
+  },
+  "img": "modal/파이어뱃.png"
+},
+"메딕": {
+  "desc": "메딕은 테란의 지원 유닛으로, 아군 유닛을 치료하거나 상태 이상을 회복시킬 수 있습니다.",
+  "stats": {
+    "공격력": "0",
+    "공격속도": "N/A",
+    "이동속도": "2.976",
+    "사정거리": "N/A",
+    "생산비용": "50 미네랄, 25 가스",
+    "생산건물": "병영 + 아카데미",
+    "특수능력": "회복, 상태 이상 회복"
+  },
+  "img": "modal/메딕.png"
+},
+"고스트": {
+  "desc": "고스트는 테란의 특수 유닛으로, 핵미사일을 발사하거나 적 유닛을 잠시 마비시킬 수 있습니다.",
+  "stats": {
+    "공격력": "10",
+    "공격속도": "1.26",
+    "이동속도": "2.976",
+    "사정거리": "7",
+    "생산비용": "25 미네랄, 75 가스",
+    "생산건물": "병영 + 아카데미",
+    "특수능력": "핵미사일, 클로킹, 락다운"
+  },
+  "img": "modal/고스트.png"
+},
+"벌처": {
+  "desc": "벌처는 빠른 이동속도를 가진 테란의 기계 유닛으로, 지뢰를 설치하여 적의 진로를 방해합니다.",
+  "stats": {
+    "공격력": "20",
+    "공격속도": "1.26",
+    "이동속도": "4.963",
+    "사정거리": "5",
+    "생산비용": "75 미네랄",
+    "생산건물": "공장",
+    "특수능력": "지뢰 설치"
+  },
+  "img": "modal/벌처.png"
+},
+"골리앗": {
+  "desc": "골리앗은 지상 및 공중 유닛을 모두 공격할 수 있는 테란의 기계 유닛입니다.",
+  "stats": {
+    "공격력": "12",
+    "공격속도": "1.26",
+    "이동속도": "2.976",
+    "사정거리": "5",
+    "생산비용": "100 미네랄, 50 가스",
+    "생산건물": "공장 + 조선소",
+  },
+  "img": "modal/골리앗.png"
+},
+"탱크": {
+  "desc": "탱크는 강력한 포격 능력을 가진 테란의 기계 유닛으로, 포격 모드와 시즈 모드를 전환할 수 있습니다.",
+  "stats": {
+    "공격력": "30",
+    "공격속도": "1.26",
+    "이동속도": "2.976",
+    "사정거리": "7",
+    "생산비용": "150 미네랄, 100 가스",
+    "생산건물": "공장 + 조선소",
+    "특수능력": "시즈 모드 전환"
+  },
+  "img": "modal/탱크.png"
+},
+"드랍쉽": {
+  "desc": "드랍쉽은 지상 유닛을 공중으로 수송할 수 있는 테란의 공중 유닛입니다.",
+  "stats": {
+    "공격력": "0",
+    "공격속도": "N/A",
+    "이동속도": "2.976",
+    "사정거리": "N/A",
+    "생산비용": "100 미네랄, 100 가스",
+    "생산건물": "스타포트",
+    "특수능력": "지상 유닛 수송"
+  },
+  "img": "modal/드랍쉽.png"
+},
+"레이스": {
+  "desc": "레이스는 스텔스 기능을 가진 테란의 공중 유닛으로, 공중 유닛을 효과적으로 처치할 수 있습니다.",
+  "stats": {
+    "공격력": "8",
+    "공격속도": "1.26",
+    "이동속도": "4.963",
+    "사정거리": "5",
+    "생산비용": "150 미네랄, 100 가스",
+    "생산건물": "스타포트",
+    "특수능력": "클로킹"
+  },
+  "img": "modal/레이스.png"
+},
+"발키리": {
+  "desc": "발키리는 다수의 미사일을 발사하여 공중 유닛을 대량으로 처치할 수 있는 테란의 공중 유닛입니다.",
+  "stats": {
+    "공격력": "6",
+    "공격속도": "1.26",
+    "이동속도": "2.976",
+    "사정거리": "6",
+    "생산비용": "250 미네랄, 125 가스",
+    "생산건물": "스타포트 + 조선소",
+  },
+  "img": "modal/발키리.png"
+},
+"사이언스배슬": {
+  "desc": "사이언스배슬은 테란의 지원 공중 유닛으로, EMP 충격파나 디스플레이어를 사용하여 적의 능력을 제한할 수 있습니다.",
+  "stats": {
+    "공격력": "0",
+    "공격속도": "N/A",
+    "이동속도": "2.976",
+    "사정거리": "N/A",
+    "생산비용": "100 미네랄, 225 가스",
+    "생산건물": "스타포트 + 조선소",
+    "특수능력": "EMP 충격파, 이레디에잇, 디펜시브 매트릭스"
+  },
+  "img": "modal/사이언스배슬.png"
+},
+"배틀크루저": {
+  "desc": "배틀크루저는 테란의 최종 병기급 공중 유닛으로, 강력한 공격력과 체력을 자랑합니다.",
+  "stats": {
+    "공격력": "25",
+    "공격속도": "1.26",
+    "이동속도": "2.976",
+    "사정거리": "6",
+    "생산비용": "400 미네랄, 300 가스",
+    "생산건물": "스타포트 + 조선소",
+    "특수능력": "야마토 포"
+  },
+  "img": "modal/배틀크루저.png"
+},
+"프로브": {
+    "desc": "프로브는 프로토스의 기본 일꾼 유닛으로, 자원을 채취하고 건물을 건설하는 역할을 합니다.",
+    "stats": {
+      "공격력": "5",
+      "공격속도": "0.75",
+      "이동속도": "2.34",
+      "사정거리": "0.1",
+      "생산비용": "50 미네랄",
+      "생산건물": "넥서스",
+      "특수능력": "자원채취"
+    },
+    "img": "modal/프로브.png"
+  },
+      "질럿": {
+  "desc": "질럿은 프로토스의 기본 근접 공격 유닛으로, 빠른 생산과 강력한 근접 공격력을 지니고 있습니다.",
+  "stats": {
+    "공격력": "16",
+    "공격속도": "1.26",
+    "이동속도": "2.81",
+    "사정거리": "0.1",
+    "생산비용": "100 미네랄",
+    "생산건물": "게이트웨이",
+    "특수능력": "이동속도 증가가"
+  },
+  "img": "modal/질럿.png"
+},
+"드라군": {
+  "desc": "드라군은 프로토스의 중거리 공격 유닛으로, 강력한 레이저를 사용하여 지상 및 공중 유닛을 공격합니다.",
+  "stats": {
+    "공격력": "20",
+    "공격속도": "1.26",
+    "이동속도": "2.47",
+    "사정거리": "6",
+    "생산비용": "125 미네랄, 50 가스",
+    "생산건물": "게이트웨이 + 사이버네틱스 코어",
+    "특수능력": "사거리 증가가"
+  },
+  "img": "modal/드라군.png"
+},
+"하이템플러": {
+  "desc": "하이템플러는 강력한 사이오닉 능력을 지닌 마법 유닛으로, 사이오닉 스톰을 사용하여 광범위한 피해를 입힙니다.",
+  "stats": {
+    "공격력": "20",
+    "공격속도": "1.26",
+    "이동속도": "2.34",
+    "사정거리": "6",
+    "생산비용": "50 미네랄, 150 가스",
+    "생산건물": "게이트웨이 + 사이버네틱스 코어 + 템플러 아카이브",
+    "특수능력": "사이오닉 스톰, 할루시네이션"
+  },
+  "img": "modal/하이템플러.png"
+},
+"아칸": {
+  "desc": "아칸은 두 하이템플러가 합체하여 생성되는 유닛으로, 사이오닉 스톰과 공격력이 강화됩니다.",
+  "stats": {
+    "공격력": "25",
+    "공격속도": "1.26",
+    "이동속도": "2.34",
+    "사정거리": "6",
+    "생산비용": "없음 (하이템플러 2개 합체)",
+    "생산건물": "없음",
+  },
+  "img": "modal/아칸.png"
+},
+"다크템플러": {
+  "desc": "다크템플러는 스텔스 능력을 지닌 근접 공격 유닛으로, 강력한 피해를 입힙니다.",
+  "stats": {
+    "공격력": "40",
+    "공격속도": "1.26",
+    "이동속도": "2.34",
+    "사정거리": "0.1",
+    "생산비용": "125 미네랄, 125 가스",
+    "생산건물": "게이트웨이 + 사이버네틱스 코어 + 시타델 오브 아둔",
+    "특수능력": "클로킹"
+  },
+  "img": "modal/다크템플러.png"
+},
+"다크아칸": {
+  "desc": "다크아칸은 두 다크템플러가 합체하여 생성되는 마법 유닛으로, 피드백, 마엘스톰, 마인드 컨트롤 등의 능력을 사용합니다.",
+  "stats": {
+    "공격력": "25",
+    "공격속도": "1.26",
+    "이동속도": "2.34",
+    "사정거리": "6",
+    "생산비용": "없음 (다크템플러 2개 합체)",
+    "생산건물": "없음",
+    "특수능력": "피드백, 마엘스톰, 마인드 컨트롤"
+  },
+  "img": "modal/다크아칸.png"
+},
+"셔틀": {
+  "desc": "셔틀은 지상 유닛을 공중으로 수송할 수 있는 프로토스의 공중 유닛입니다.",
+  "stats": {
+    "공격력": "0",
+    "공격속도": "N/A",
+    "이동속도": "2.56",
+    "사정거리": "N/A",
+    "생산비용": "100 미네랄, 100 가스",
+    "생산건물": "로보틱스 퍼실리티",
+    "특수능력": "지상 유닛 수송"
+  },
+  "img": "modal/셔틀.png"
+},
+"리버": {
+  "desc": "리버는 스캐럽을 발사하여 광범위한 피해를 입히는 프로토스의 공중 유닛입니다.",
+  "stats": {
+    "공격력": "100",
+    "공격속도": "N/A",
+    "이동속도": "0.83",
+    "사정거리": "6",
+    "생산비용": "200 미네랄, 100 가스",
+    "생산건물": "로보틱스 퍼실리티 + 로보틱스 서포트 베이",
+    "특수능력": "스캐럽 발사"
+  },
+  "img": "modal/리버.png"
+},
+"옵저버": {
+  "desc": "옵저버는 스텔스 능력을 지닌 탐지 유닛으로, 적의 은폐 유닛을 탐지할 수 있습니다.",
+  "stats": {
+    "공격력": "0",
+    "공격속도": "N/A",
+    "이동속도": "2.34",
+    "사정거리": "N/A",
+    "생산비용": "25 미네랄, 75 가스",
+    "생산건물": "로보틱스 퍼실리티",
+    "특수능력": "시야확보보"
+  },
+  "img": "modal/옵저버.png"
+},
+"커세어": {
+  "desc": "커세어는 공중 유닛으로, 스플래시 데미지를 입히는 디스럭션 웹을 사용할 수 있습니다.",
+  "stats": {
+    "공격력": "12",
+    "공격속도": "1.26",
+    "이동속도": "3.13",
+    "사정거리": "5",
+    "생산비용": "100 미네랄, 125 가스",
+    "생산건물": "스타게이트",
+    "특수능력": "디스럭션 웹"
+  },
+  "img": "modal/커세어.png"
+},
+"스카웃": {
+  "desc": "스카웃은 공중 및 지상 공격이 가능한 유닛으로, 공중 유닛에 강력한 피해를 입힙니다.",
+  "stats": {
+    "공격력": "20",
+    "공격속도": "1.26",
+    "이동속도": "3.13",
+    "사정거리": "5",
+    "생산비용": "275 미네랄, 125 가스",
+    "생산건물": "스타게이트",
+  },
+  "img": "modal/스카웃.png"
+},
+"캐리어": {
+  "desc": "캐리어는 프로토스의 최종 공중 유닛으로, 여러 개의 인터셉터를 출격시켜 대상을 공격합니다.",
+  "stats": {
+    "공격력": "6 × 최대 8 (인터셉터)",
+    "공격속도": "약 1.26 (인터셉터 발사 간격)",
+    "이동속도": "2.63",
+    "사정거리": "8 (인터셉터 사정거리)",
+    "생산비용": "350 미네랄, 250 가스",
+    "생산건물": "스타게이트 + 플릿 비콘",
+    "특수능력": "인터셉터 발사 (최대 8기)"
+  },
+  "img": "modal/캐리어.png"
+},
+"아비터": {
+  "desc": "아비터는 프로토스의 지원형 공중 유닛으로, 근처 아군 유닛을 은폐시키고 다양한 고급 마법을 사용할 수 있습니다.",
+  "stats": {
+    "공격력": "10",
+    "공격속도": "1.26",
+    "이동속도": "2.63",
+    "사정거리": "5",
+    "생산비용": "100 미네랄, 350 가스",
+    "생산건물": "스타게이트 + 아비터 트리뷰널",
+    "특수능력": "스테이시스 필드, 리콜, 퍼소널 클로킹"
+  },
+  "img": "modal/아비터.png"
+}
+
+    };
+
+    function showDetail(unitName) {
+      const modal = document.getElementById('modal');
+      const nameElem = document.getElementById('unit-name');
+      const descElem = document.getElementById('unit-desc');
+      const statsElem = document.getElementById('unit-stats');
+      const imgElem = document.getElementById('unit-image');
+
+      if (!units[unitName]) return;
+
+      nameElem.textContent = unitName;
+      descElem.textContent = units[unitName].desc;
+
+      // Clear previous stats
+      statsElem.innerHTML = '';
+      for (const [key, value] of Object.entries(units[unitName].stats)) {
+        const li = document.createElement('li');
+        li.textContent = `${key}: ${value}`;
+        statsElem.appendChild(li);
+      }
+
+      imgElem.src = units[unitName].img;
+      imgElem.alt = unitName + " 이미지";
+
+      modal.style.display = 'block';
+    }
+
+    function hideModal(event) {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
